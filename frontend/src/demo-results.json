@@ -1,0 +1,39 @@
+{
+  "label": "Public source-build placeholder; run Bundled check for measured output",
+  "provenance": {
+    "source": "none",
+    "code_data_manifest_sha256": "none",
+    "source_sha256": "none",
+    "settings": {
+      "companies": 0,
+      "products": 0,
+      "rows": 0,
+      "verify": []
+    }
+  },
+  "rates_percent": {
+    "tp_flag_rate": 0,
+    "detection_accuracy": 0,
+    "degraded_rate": 0,
+    "fp_flag_rate": 0
+  },
+  "counts": {
+    "eligible_flagged_tp": 0,
+    "should_flag": 0,
+    "tp": 0,
+    "tn": 0,
+    "n_cells": 0,
+    "degraded": 0,
+    "true_errors": 0,
+    "clean_flags": 0,
+    "flagged_total": 0
+  },
+  "row_reviews": {
+    "rows": 0,
+    "total_rows": 0,
+    "events": 0,
+    "explanation": "No precomputed public result"
+  },
+  "examples": [],
+  "limitations": "No precomputed public result"
+}

@@ -1,0 +1,68 @@
+{
+  "source": "EDGI Zenodo DOI 10.5281/zenodo.19476276, federal agency Scope 3 FY2022-2023",
+  "unit": "metric tonnes CO2e",
+  "years": {
+    "2022": {
+      "agency": "../output/practical-evaluation/federal-agencies/2022-agency.csv",
+      "category": "../output/practical-evaluation/federal-agencies/2022-category.csv"
+    },
+    "2023": {
+      "agency": "../output/practical-evaluation/federal-agencies/2023-agency.csv",
+      "category": "../output/practical-evaluation/federal-agencies/2023-category.csv"
+    }
+  },
+  "tables": {
+    "agency": {
+      "id_column": "Agency",
+      "value_column": "Emissions (MT CO₂e)",
+      "percent_column": "Percent of Total",
+      "total_label": "Grand Total",
+      "expected_ids": [
+        "DOD",
+        "DOE",
+        "VA",
+        "USDA",
+        "HHS",
+        "NASA",
+        "DHS",
+        "TREASURY",
+        "GSA",
+        "STATE",
+        "DOJ",
+        "DOT",
+        "DOI",
+        "DOC",
+        "SSA",
+        "DOL",
+        "EPA",
+        "ED",
+        "HUD",
+        "SBA",
+        "NARA",
+        "OPM"
+      ],
+      "value_resolution_mtco2e": "1",
+      "percent_resolution_points": "0.1"
+    },
+    "category": {
+      "id_column": "Category",
+      "value_column": "Emissions (MT CO₂e)",
+      "percent_column": "Percent of Total",
+      "total_label": "Grand Total",
+      "expected_ids": [
+        "Supply Chain (Cat. 1/2/4)",
+        "Fuel and Energy Related (Cat. 3)",
+        "Employee Commuting (Cat. 7)",
+        "Business Travel (Cat. 6)",
+        "Upstream Leased Assets (Cat. 8)",
+        "Waste Disposal (Cat. 5)"
+      ],
+      "value_resolution_mtco2e": "1",
+      "percent_resolution_points": "0.1"
+    }
+  },
+  "controlled_change_ids": {
+    "agency": "DOD",
+    "category": "Supply Chain (Cat. 1/2/4)"
+  }
+}

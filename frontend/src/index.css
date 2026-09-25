@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+/* Folio design system: system fonts only, no font downloads (Arial for
+   display/body, Georgia for the serif figure accent, Courier New for mono).
+   That drops the two @fontsource packages this file used to import. */
+
+/* ── Tokens ───────────────────────────────────────────────────────────
+   Values are Folio's own token set (tokens.json), ported onto the var
+   names this codebase already reads: ink/muted collapse onto the text-*
+   ramp, paper/panel/field onto bg/bg-soft/card, accent tracks Folio's
+   theme-flipping `primary` (green in light, brass in dark) since it is
+   what drives buttons here, not just decoration.
+
+   scope3-section.jsx reads --text, --text-secondary, --text-faint,
+   --text-faintest, --accent, --accent-rgb, --bg and --surface-rgb. That
+   is the whole contract, which is why a palette swap needs no component
+   edits.                                                               */
+:root {
+  color-scheme: light;
+
+  --bg: #F2EEE4;               /* Folio paper */
+  --bg-soft: #E6E4D8;          /* Folio panel */
+  --card: #E6E4D8;             /* Folio panel */
+  --border: #B9BDAD;           /* Folio line */
+
+  /* Ink colour, as an rgb triple: the section tints surfaces with
+     rgba(var(--surface-rgb), 0.03) and expects it to read as a wash. */
+  --surface-rgb: 32, 43, 37;
+
+  --text: #202B25;             /* Folio ink */
+  --text-secondary: #566153;   /* Folio muted - one secondary tone, no five-step ramp */
+  --text-tertiary: #566153;
+  --text-faint: #566153;
+  --text-faintest: #566153;
+
+  --accent: #245A43;           /* Folio primary (light = accent-green) */
+  --accent-rgb: 36, 90, 67;
+  --accent-hover: #29684D;     /* primary, brightness(1.15) per Folio's hover note */
+  --on-accent: #FFF9ED;        /* Folio on-primary */
+  --accent-wash: #E6E4D8;      /* Folio panel: light theme carries no colour wash */
+
+  --warn: #634311;             /* Folio on-alert */
+  --err:  #A03D32;             /* Folio danger */
+
+  --radius: 9px;                /* Folio radius-lg: cards and tiles */
+  --radius-sm: 3px;             /* Folio radius-sm: controls - nearly square */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --bg: #171E1B;              /* Folio paper (dark) */
+    --bg-soft: #1D2721;         /* Folio panel (dark) */
+    --card: #1D2721;
+    --border: #E9DFBD24;        /* Folio line (dark) */
+
+    --surface-rgb: 246, 240, 223;
+
+    --text: #F6F0DF;            /* Folio ink (dark) */
+    --text-secondary: #D7D3C3;  /* Folio muted (dark) */
+    --text-tertiary: #D7D3C3;
+    --text-faint: #D7D3C3;
+    --text-faintest: #D7D3C3;
+
+    --accent: #E8C581;          /* Folio primary (dark): brass, so it reads on the dark ground */
+    --accent-rgb: 232, 197, 129;
+    --accent-hover: #FFE394;
+    --on-accent: #29261D;       /* Folio on-primary (dark) */
+    --accent-wash: #174735;     /* Folio deep-green: dark feature panel behind a headline figure */
+
+    /* status-caution (#FBBF24) sat too close to the brass accent above to
+       tell "met" and "not met" apart at a glance - status-info instead. */
+    --warn: #60A5FA;            /* Folio status-info */
+    --err:  #F43F5E;            /* Folio status-negative */
+  }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+body {
+  overflow-x: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Folio's Display group: Arial at heavy weight with tight negative
+     tracking. -0.04em is Folio's mid-scale value (its "heading" style);
+     the system also varies this per size (-0.035em to -0.07em), which
+     would need a heading class per size - skipped, add if a headline
+     needs the wider hero-scale tracking. */
+  .font-display {
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: -0.04em;
+  }
+
+  /* Folio's serif accent (Georgia): headline figures and key statistics,
+     set in the accent colour. */
+  .font-figure {
+    font-family: Georgia, serif;
+  }
+
+  .font-num {
+    font-family: 'Courier New', monospace;
+    font-feature-settings: 'tnum';
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* Keep long provenance hashes inside the results card on narrow screens. */
+#results p {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ── Motion ───────────────────────────────────────────────────────────
+   MOTION_INTENSITY 4: CSS transitions plus one entry cascade and a
+   scroll reveal. No animation library, no scroll listener, no GSAP.
+   Both effects are opt-in: without the media query, or without
+   animation-timeline support, content renders visible and static.     */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .rise {
+    animation: rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i, 0) * 70ms);
+  }
+
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 70%;
+    }
+  }
+}

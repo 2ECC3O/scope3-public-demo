@@ -1,0 +1,11 @@
+/.venv/
+/.tools/
+/output/
+/project 01/
+/generated_data/
+/demo-results.json
+/run_manifest.json
+/frontend/node_modules/
+/.env*
+__pycache__/
+*.pyc

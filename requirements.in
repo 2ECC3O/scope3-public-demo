@@ -1,0 +1,13 @@
+flask
+matplotlib
+numpy
+openpyxl
+pandas
+pillow
+psutil
+scikit-learn
+scipy
+seaborn
+shap
+tqdm
+xgboost
